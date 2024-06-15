@@ -14,9 +14,6 @@ Python, known for its ease of learning and understanding, is the primary languag
 # Google API Client
 The googleapiclient library in Python facilitates communication with various Google APIs. In this project, it is primarily used to interact with YouTube's Data API v3, enabling the retrieval of essential information such as channel details, video specifics, and comments. This library allows developers to easily access and manipulate YouTube's extensive data resources programmatically.
 
-# MongoDB
-MongoDB is a document database known for its scalability and flexibility with evolving data schemas. It stores structured or unstructured data in a JSON-like format, making it easy for developers to handle diverse data types.
-
 # PostgreSQL
 PostgreSQL is an open-source, advanced, and highly scalable database management system (DBMS). It is renowned for its reliability and extensive features, providing a robust platform for storing and managing structured data with advanced SQL capabilities.
 
@@ -24,8 +21,7 @@ PostgreSQL is an open-source, advanced, and highly scalable database management 
 1. googleapiclient.discovery
 2. streamlit
 3. psycopg2
-4. pymongo
-5. pandas
+4. pandas
 
 ## Setup
 1. **Obtain YouTube API key:** Sign up for a YouTube API key from the Google Developer Console.
@@ -51,8 +47,6 @@ PostgreSQL is an open-source, advanced, and highly scalable database management 
 The YouTube Data Harvesting and Warehousing application offers the following functionalities:
 
 Retrieval of channel and video data from YouTube using the YouTube API.
-
-Storage of data in a MongoDB database as a data lake.
 
 Migration of data from the data lake to a SQL database for efficient querying and analysis.
 
