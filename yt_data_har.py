@@ -1,6 +1,5 @@
 import os
 from googleapiclient.discovery import build
-import pymongo
 import psycopg2
 import pandas as pd
 import streamlit as st
@@ -12,14 +11,11 @@ load_dotenv()
 # GET CREDENTIALS FROM ENVIRONMENT FILE
 
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
-MONGO_DB_URL = os.getenv("MONGO_DB_URL")
 POSTGRES_DB_HOST = os.getenv("POSTGRES_DB_HOST")
 POSTGRES_DB_USER = os.getenv("POSTGRES_DB_USER")
 POSTGRES_DB_PASSWORD = os.getenv("POSTGRES_DB_PASSWORD")
 POSTGRES_DB_NAME = os.getenv("POSTGRES_DB_NAME")
 POSTGRES_PORT = os.getenv("POSTGRES_PORT")
-MONGO_DB_NAME = os.getenv("MONGO_DB_NAME")
-MONGO_DB_COLLECTION = os.getenv("MONGO_DB_COLLECTION")
 
 # BUILDING CONNECTION WITH YOstttUTUBE API
 
