@@ -351,63 +351,79 @@ def videos_table(df_video_details):
                             port = POSTGRES_PORT)
     my_cursor=connect_db.cursor()
 
-    try:
-        create_query='''create table if not exists Videos(Channel_Name varchar(100), 
-                                                        Channel_Id varchar(100),
-                                                        Video_Id varchar(100) primary key, 
-                                                        Video_Name varchar(150), 
-                                                        Video_Description text,
-                                                        Tags text, 
-                                                        PublishedAt timestamp, 
-                                                        Views_Count bigint,
-                                                        Like_Count bigint, 
-                                                        Favorite_Count int, 
-                                                        Comment_Count int, 
-                                                        Duration interval, 
-                                                        Thumbnail varchar(200), 
-                                                        Caption_Status varchar(50)
-                                                            )'''
-        my_cursor.execute(create_query)
     
-    except Exception as e:
-        print("Error creating table:", e)
-
-    insert_query = '''insert into Videos(Channel_Name, 
-                                            Channel_Id,
-                                            Video_Id,
-                                            Video_Name, 
-                                            Video_Description,
-                                            Tags, 
-                                            PublishedAt, 
-                                            Views_Count,
-                                            Like_Count, 
-                                            Favorite_Count, 
-                                            Comment_Count, 
-                                            Duration, 
-                                            Thumbnail, 
-                                            Caption_Status)
-                                            
-                                            values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+    # try:
+    create_query='''create table if not exists Videos(Channel_Name varchar(100), 
+                                                    Channel_Id varchar(100),
+                                                    Video_Id varchar(100) primary key, 
+                                                    Video_Name varchar(150), 
+                                                    Video_Description text,
+                                                    Tags text, 
+                                                    PublishedAt timestamp, 
+                                                    Views_Count bigint,
+                                                    Like_Count bigint, 
+                                                    Favorite_Count int, 
+                                                    Comment_Count int, 
+                                                    Duration interval, 
+                                                    Thumbnail varchar(200), 
+                                                    Caption_Status varchar(50)
+                                                        )'''
+    my_cursor.execute(create_query)
+    connect_db.commit()
+    
+    # except Exception as e:
+    #     print("Error creating table:", e)
     for index, row in df_video_details.iterrows():
+        insert_query = '''insert into Videos(Channel_Name, 
+                                                Channel_Id,
+                                                Video_Id,
+                                                Video_Name, 
+                                                Video_Description,
+                                                Tags, 
+                                                PublishedAt, 
+                                                Views_Count,
+                                                Like_Count, 
+                                                Favorite_Count, 
+                                                Comment_Count, 
+                                                Duration, 
+                                                Thumbnail, 
+                                                Caption_Status)
+                                                
+                                                values(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
+    # for index, row in df_video_details.iterrows():
 
-        try:
-            my_cursor.execute(insert_query, (row['Channel_Name'],
-                    row['Channel_Id'],
-                    row['Video_Id'],
-                    row['Video_Name'],
-                    row['Video_Description'],
-                    row['Tags'],
-                    row['PublishedAt'],
-                    row['Views_Count'],
-                    row['Like_Count'],
-                    row['Favorite_Count'],
-                    row['Comment_Count'],
-                    row['Duration'],
-                    row['Thumbnail'],
-                    row['Caption_Status']))
+        # my_cursor.execute(insert_query, (row['Channel_Name'],
+        #         row['Channel_Id'],
+        #         row['Video_Id'],
+        #         row['Video_Name'],
+        #         row['Video_Description'],
+        #         row['Tags'],
+        #         row['PublishedAt'],
+        #         row['Views_Count'],
+        #         row['Like_Count'],
+        #         row['Favorite_Count'],
+        #         row['Comment_Count'],
+        #         row['Duration'],
+        #         row['Thumbnail'],
+        #         row['Caption_Status']))
+        values = (row['Channel_Name'],
+                row['Channel_Id'],
+                row['Video_Id'],
+                row['Video_Name'],
+                row['Video_Description'],
+                row['Tags'],
+                row['PublishedAt'],
+                row['Views_Count'],
+                row['Like_Count'],
+                row['Favorite_Count'],
+                row['Comment_Count'],
+                row['Duration'],
+                row['Thumbnail'],
+                row['Caption_Status'])
+        
+        my_cursor.execute(insert_query, values)
+        connect_db.commit()
 
-        except Exception as e:
-            connect_db.rollback()
 
 #TABLE CREATION COMMENTS
 
